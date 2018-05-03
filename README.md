@@ -4,7 +4,7 @@
 ## Install
 
 ```
-$ npm i -D auto-update-from-github
+$ npm i -S auto-update-from-github
 ```
 
 ## Usage

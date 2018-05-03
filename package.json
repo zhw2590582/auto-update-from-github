@@ -1,11 +1,10 @@
 {
   "name": "auto-update-from-github",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "Auto update from github",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc -w index.ts",
-    "start": "node index.js"
+    "dev": "tsc -w index.ts"
   },
   "keywords": [
     "github",
@@ -26,6 +25,9 @@
   },
   "homepage": "https://github.com/zhw2590582/auto-update-from-github#readme",
   "devDependencies": {
+    "typescript": "^2.8.3"
+  },
+  "dependencies":{
     "chalk": "^2.4.1",
     "dayjs": "^1.5.16",
     "download-git-repo": "^1.0.2",
@@ -34,7 +36,6 @@
     "ora": "^2.1.0",
     "package-json": "^4.0.1",
     "rimraf": "^2.6.2",
-    "semver": "^5.5.0",
-    "typescript": "^2.8.3"
+    "semver": "^5.5.0"
   }
 }
