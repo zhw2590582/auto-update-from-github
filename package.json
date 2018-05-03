@@ -1,0 +1,36 @@
+{
+  "name": "auto-update-from-github",
+  "version": "1.0.0",
+  "description": "Auto update from github",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc index.ts",
+    "start": "node index.js",
+    "deploy": "npm run build && npm start",
+    "test": "jest"
+  },
+  "keywords": [
+    "github",
+    "auto",
+    "update",
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhw2590582/auto-update-from-github.git"
+  },
+  "authors": [
+    "Harvey Zack <laozhaochaguan@gmail.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhw2590582/auto-update-from-github/issues"
+  },
+  "homepage": "https://github.com/zhw2590582/auto-update-from-github#readme",
+  "devDependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "jest": "^22.4.3",
+    "typescript": "^2.8.3"
+  }
+}
