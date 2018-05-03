@@ -7,18 +7,18 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 var path = require('path');
-var chalk = require('chalk');
 var rm = require('rimraf').sync;
 var download = require('download-git-repo');
 var semver = require('semver');
 var ora = require('ora');
-var gitPackageJson = require('git-package-json');
+var cheerio = require('cheerio');
+var request = require('request');
 var exists = require('fs').existsSync;
 var logger = require('./logger');
 var defaultOption = {
     git: '',
     dir: '.',
-    freq: 3000
+    freq: 0
 };
 function aufg(option) {
     option = __assign({}, defaultOption, option);
@@ -37,6 +37,8 @@ function aufg(option) {
         downloadGit(option.git, path.resolve(option.dir), repeat);
     }
     function repeat() {
+        if (!option.freq)
+            return;
         setTimeout(function () {
             aufg(option);
         }, option.freq);
@@ -44,10 +46,12 @@ function aufg(option) {
 }
 function updateGit(git, dir, version, callback) {
     var spinner = ora("Loading " + git + "/package.json \n").start();
-    gitPackageJson(git, function (err, data) {
-        spinner.stop();
+    request("https://github.com/" + git + "/blob/master/package.json", function (err, response, body) {
         if (err)
             throw err;
+        spinner.stop();
+        var $ = cheerio.load(body);
+        var data = JSON.parse($('.blob-wrapper table').text());
         if (semver.gt(data.version, version)) {
             logger.success("Found newer version: " + version + " => " + data.version);
             if (exists(dir))
@@ -56,18 +60,18 @@ function updateGit(git, dir, version, callback) {
         }
         else {
             logger.warn("Not found newer version: " + version);
-            callback && callback();
+            callback();
         }
     });
 }
 function downloadGit(git, dir, callback) {
-    var spinner = ora("Download git from " + git + " to " + dir).start();
+    var spinner = ora("Download git from " + git + " to " + dir + " \n").start();
     download(git, dir, function (err) {
         spinner.stop();
         if (err) {
             logger.fatal("Failed to download repo " + git + " : " + err.message.trim());
         }
-        callback && callback();
+        callback();
         logger.success("Download git succeed");
     });
 }

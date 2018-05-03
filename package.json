@@ -1,6 +1,6 @@
 {
   "name": "auto-update-from-github",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Auto update from github",
   "main": "index.js",
   "scripts": {
@@ -27,14 +27,13 @@
   "devDependencies": {
     "typescript": "^2.8.3"
   },
-  "dependencies":{
+  "dependencies": {
     "chalk": "^2.4.1",
+    "cheerio": "^1.0.0-rc.2",
     "dayjs": "^1.5.16",
     "download-git-repo": "^1.0.2",
-    "git-package-json": "^1.4.7",
-    "git-source": "^1.1.7",
     "ora": "^2.1.0",
-    "package-json": "^4.0.1",
+    "request": "^2.85.0",
     "rimraf": "^2.6.2",
     "semver": "^5.5.0"
   }
