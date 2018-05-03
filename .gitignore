@@ -3,6 +3,7 @@ node_modules
 .DS_Store
 *.log
 build
+demo
 dist
 package-lock.json
 yarn.lock
