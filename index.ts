@@ -5,7 +5,7 @@ declare var __dirname: any;
 interface Option {
 	git: string;
 	dir: string;
-	freq: number;
+	freq?: number;
 }
 
 const path = require('path');
@@ -21,7 +21,7 @@ const logger = require('./logger');
 const defaultOption: Option = {
 	git: '',
 	dir: '.',
-	freq: 3000
+	freq: 0
 };
 
 function aufg(option: Option): void {
@@ -41,6 +41,7 @@ function aufg(option: Option): void {
 	}
 
 	function repeat(): void {
+		if (!option.freq) return;
 		setTimeout(() => {
 			aufg(option);
 		}, option.freq);
@@ -58,19 +59,19 @@ function updateGit(git: string, dir: string, version: string, callback): void {
 			downloadGit(git, dir, callback);
 		} else {
 			logger.warn(`Not found newer version: ${version}`);
-			callback && callback();
+			callback();
 		}
 	});
 }
 
 function downloadGit(git: string, dir: string, callback): void {
-	const spinner = ora(`Download git from ${git} to ${dir}`).start();
+	const spinner = ora(`Download git from ${git} to ${dir} \n`).start();
 	download(git, dir, err => {
 		spinner.stop();
 		if (err) {
 			logger.fatal(`Failed to download repo ${git} : ${err.message.trim()}`);
 		}
-		callback && callback();
+		callback();
 		logger.success(`Download git succeed`);
 	});
 }
