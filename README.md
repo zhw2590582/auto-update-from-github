@@ -1,5 +1,5 @@
 # auto-update-from-github [![Build Status](https://www.travis-ci.org/zhw2590582/auto-update-from-github.svg?branch=master)](https://www.travis-ci.org/zhw2590582/auto-update-from-github)
-> 自动同步 github 代码：只要远程 git 仓库版本号比本地 git 仓库版本号高，就会自动覆盖
+> 自动同步 github 代码：只要远程 github 仓库版本号比本地 github 仓库版本号高，就会自动覆盖
 
 ## Install
 
