@@ -71,9 +71,4 @@ function downloadGit(git, dir, callback) {
         logger.success("Download git succeed");
     });
 }
-aufg({
-    git: 'zhw2590582/obj-to-string',
-    dir: './demo/',
-    freq: 5000
-});
 module.exports = aufg;

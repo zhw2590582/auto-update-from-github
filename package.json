@@ -1,6 +1,6 @@
 {
   "name": "auto-update-from-github",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Auto update from github",
   "main": "index.js",
   "scripts": {

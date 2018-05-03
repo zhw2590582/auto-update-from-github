@@ -75,10 +75,4 @@ function downloadGit(git: string, dir: string, callback): void {
 	});
 }
 
-aufg({
-	git: 'zhw2590582/obj-to-string',
-	dir: './demo/',
-	freq: 5000
-});
-
 module.exports = aufg;
