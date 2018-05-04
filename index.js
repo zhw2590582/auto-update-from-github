@@ -51,16 +51,21 @@ function updateGit(git, dir, version, callback) {
             throw err;
         spinner.stop();
         var $ = cheerio.load(body);
-        var data = JSON.parse($('.blob-wrapper table').text());
-        if (semver.gt(data.version, version)) {
-            logger.success("Found newer version: " + version + " => " + data.version);
-            if (exists(dir))
-                rm(dir);
-            downloadGit(git, dir, callback);
+        try {
+            var data = JSON.parse($('.blob-wrapper table').text());
+            if (semver.gt(data.version, version)) {
+                logger.success("Found newer version: " + version + " => " + data.version);
+                if (exists(dir))
+                    rm(dir);
+                downloadGit(git, dir, callback);
+            }
+            else {
+                logger.warn("Not found newer version: " + version);
+                callback();
+            }
         }
-        else {
-            logger.warn("Not found newer version: " + version);
-            callback();
+        catch (error) {
+            logger.fatal(error.message.trim());
         }
     });
 }

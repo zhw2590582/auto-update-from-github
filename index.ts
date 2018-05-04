@@ -56,14 +56,18 @@ function updateGit(git: string, dir: string, version: string, callback): void {
 			if (err) throw err;
 			spinner.stop();
 			const $ = cheerio.load(body);
-			const data = JSON.parse($('.blob-wrapper table').text());
-			if (semver.gt(data.version, version)) {
-				logger.success(`Found newer version: ${version} => ${data.version}`);
-				if (exists(dir)) rm(dir);
-				downloadGit(git, dir, callback);
-			} else {
-				logger.warn(`Not found newer version: ${version}`);
-				callback();
+			try {
+				const data = JSON.parse($('.blob-wrapper table').text());
+				if (semver.gt(data.version, version)) {
+					logger.success(`Found newer version: ${version} => ${data.version}`);
+					if (exists(dir)) rm(dir);
+					downloadGit(git, dir, callback);
+				} else {
+					logger.warn(`Not found newer version: ${version}`);
+					callback();
+				}
+			} catch (error) {
+				logger.fatal(error.message.trim());
 			}
 		}
 	);
