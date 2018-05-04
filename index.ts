@@ -1,6 +1,6 @@
-declare var module: any;
-declare var require: any;
-declare var __dirname: any;
+declare var module: NodeModule;
+declare var require: NodeRequire;
+declare var __dirname: string;
 
 interface Option {
 	git: string;
@@ -25,7 +25,7 @@ const defaultOption: Option = {
 };
 
 function aufg(option: Option): void {
-	option = { ...defaultOption, ...option };
+	option = Object.assign({}, defaultOption, option);
 	if (__dirname === path.resolve(option.dir)) {
 		logger.fatal(`You can't directly update the root directory`);
 	}

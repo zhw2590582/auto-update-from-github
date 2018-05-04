@@ -1,11 +1,3 @@
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 var path = require('path');
 var rm = require('rimraf').sync;
 var download = require('download-git-repo');
@@ -21,7 +13,7 @@ var defaultOption = {
     freq: 0
 };
 function aufg(option) {
-    option = __assign({}, defaultOption, option);
+    option = Object.assign({}, defaultOption, option);
     if (__dirname === path.resolve(option.dir)) {
         logger.fatal("You can't directly update the root directory");
     }
