@@ -18,10 +18,9 @@ function aufg(option) {
         logger.fatal("You can't directly update the root directory");
     }
     var localPath = path.resolve(option.dir, 'package.json');
-    var localPkg;
     try {
         require.cache[localPath] && delete require.cache[localPath];
-        localPkg = require(localPath);
+        var localPkg = require(localPath);
         updateGit(option.git, path.resolve(option.dir), localPkg.version, repeat);
     }
     catch (error) {

@@ -29,11 +29,10 @@ function aufg(option: Option): void {
 	if (__dirname === path.resolve(option.dir)) {
 		logger.fatal(`You can't directly update the root directory`);
 	}
-	let localPath = path.resolve(option.dir, 'package.json');
-	let localPkg;
+	const localPath = path.resolve(option.dir, 'package.json');
 	try {
 		require.cache[localPath] && delete require.cache[localPath];
-		localPkg = require(localPath);
+		const localPkg = require(localPath);
 		updateGit(option.git, path.resolve(option.dir), localPkg.version, repeat);
 	} catch (error) {
 		logger.warn(`Not found: ${localPath}`);
