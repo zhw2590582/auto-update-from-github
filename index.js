@@ -37,8 +37,9 @@ function aufg(option) {
     }
 }
 function updateGit(git, dir, version, callback) {
-    var spinner = ora("Loading " + git + "/package.json \n").start();
-    request("https://github.com/" + git + "/blob/master/package.json", function (err, response, body) {
+    var packageJson = "https://github.com/" + git + "/blob/master/package.json";
+    var spinner = ora("Loading " + packageJson + " \n").start();
+    request(packageJson, function (err, response, body) {
         if (err)
             throw err;
         spinner.stop();

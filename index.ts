@@ -49,27 +49,26 @@ function aufg(option: Option): void {
 }
 
 function updateGit(git: string, dir: string, version: string, callback): void {
-	const spinner = ora(`Loading ${git}/package.json \n`).start();
-	request(
-		`https://github.com/${git}/blob/master/package.json`,
-		(err, response, body) => {
-			if (err) throw err;
-			spinner.stop();
-			const $ = cheerio.load(body);
-			try {
-				const data = JSON.parse($('.blob-wrapper table').text());
-				if (semver.gt(data.version, version)) {
-					logger.success(`Found newer version: ${version} => ${data.version}`);
-					if (exists(dir)) rm(dir);
-					downloadGit(git, dir, callback);
-				} else {
-					logger.warn(`Not found newer version: ${version}`);
-					callback();
-				}
-			} catch (error) {
-				logger.fatal(error.message.trim());
+	const packageJson = `https://github.com/${git}/blob/master/package.json`;
+	const spinner = ora(`Loading ${packageJson} \n`).start();
+	request(packageJson, (err, response, body) => {
+		if (err) throw err;
+		spinner.stop();
+		const $ = cheerio.load(body);
+		try {
+			const data = JSON.parse($('.blob-wrapper table').text());
+			if (semver.gt(data.version, version)) {
+				logger.success(`Found newer version: ${version} => ${data.version}`);
+				if (exists(dir)) rm(dir);
+				downloadGit(git, dir, callback);
+			} else {
+				logger.warn(`Not found newer version: ${version}`);
+				callback();
 			}
+		} catch (error) {
+			logger.fatal(error.message.trim());
 		}
+	}
 	);
 }
 
