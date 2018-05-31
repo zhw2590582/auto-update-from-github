@@ -1,6 +1,6 @@
 {
   "name": "auto-update-from-github",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Auto update from github",
   "main": "index.js",
   "scripts": {
@@ -30,11 +30,13 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "cheerio": "^1.0.0-rc.2",
-    "dayjs": "^1.5.16",
+    "dayjs": "^1.6.4",
     "download-git-repo": "^1.0.2",
+    "import-fresh": "^2.0.0",
     "ora": "^2.1.0",
     "request": "^2.85.0",
     "rimraf": "^2.6.2",
-    "semver": "^5.5.0"
+    "semver": "^5.5.0",
+    "write-json": "^3.0.1"
   }
 }

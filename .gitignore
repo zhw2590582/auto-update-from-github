@@ -2,8 +2,7 @@ node_modules
 .vscode
 .DS_Store
 *.log
-build
-demo
-dist
+examples
+commit.json
 package-lock.json
 yarn.lock
