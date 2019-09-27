@@ -31,7 +31,7 @@ const defaultOption: Option = {
 };
 
 function aufg(option: Option): void {
-	option = Object.assign({}, defaultOption, option);
+	option = (<any>Object).assign({}, defaultOption, option);
 	const localDir = path.resolve(option.dir);
 
 	if (__dirname === localDir) {
@@ -139,7 +139,7 @@ function getLastVersion(git: string, callback): void {
 
 function creatCommit(git: string, time: string, callback): void {
 	const oldCommit = exists(path.resolve(commitJson)) ? require(commitJson) : {};
-	const newCommit = Object.assign({}, oldCommit, { [git]: time });
+	const newCommit = (<any>Object).assign({}, oldCommit, { [git]: time });
 	writeJson(commitJson, newCommit, err => {
 		if (err) throw err;
 		callback();
